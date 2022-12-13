@@ -1,4 +1,4 @@
-# Online Store
+# Travel
 [Laravel 9](https://laravel.com/docs/9.x) for Portfolio.
 
 ## Prerequisite
