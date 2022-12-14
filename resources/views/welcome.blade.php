@@ -21,6 +21,15 @@
         </style>
     </head>
     <body class="antialiased">
+        @auth
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary btn-sm">Dashboard</a>
+            <br>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn btn-warning btn-sm">Logout</button>
+            </form>
+        @endauth
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

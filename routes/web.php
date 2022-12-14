@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.admin.dashboard');
+    return view('welcome');
+});
+
+/** Auth */
+Route::prefix('auth')->middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'loginPage'])->name('auth.login-page');
+    Route::post('login', [AuthController::class, 'authenticate'])->name('auth.login-process');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+/** Admin Panel */
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
