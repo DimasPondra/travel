@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,5 +21,21 @@ class Package extends Model
     public function images()
     {
         return $this->hasMany(PackageImage::class);
+    }
+
+    /** Acessor */
+    public function getFormatDateAttribute()
+    {
+        return Carbon::parse($this->departure_date)->format('d F Y');
+    }
+
+    public function getFormatPriceAttribute()
+    {
+        return number_format($this->price, 0, ',', '.');
+    }
+
+    public function getPriceFormatNumberAttribute()
+    {
+        return round($this->price);
     }
 }

@@ -484,7 +484,7 @@ aside #toggle-navbar {
     color: red;
 }
 .thumbnail-image {
-    width: 150px;
-    height: 100px;
+    width: 100%;
+    height: 150px;
     object-fit: cover;
 }

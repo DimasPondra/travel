@@ -25,6 +25,11 @@
             <span>Customer</span>
         </a>
 
+        <a href="{{ route('admin.packages.index') }}" class="sidebar-item @yield('packagePage')">
+            <img src="{{ asset('backend/images/icons/home.svg') }}" alt="icon" width="18" height="18" class="me-3">
+            <span>Package</span>
+        </a>
+
         <h5 class="sidebar-title">Settings</h5>
 
         <a href="#" class="sidebar-item">

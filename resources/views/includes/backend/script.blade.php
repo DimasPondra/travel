@@ -1,3 +1,4 @@
+<script src="{{ asset('backend/vendor/popper/popper.min.js') }}"></script>
 <script src="{{ asset('backend/vendor/bootstrap-5/js/bootstrap.min.js') }}"></script>
 <script>
     const navbar = document.querySelector('.col-navbar')

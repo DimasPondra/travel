@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,24 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+    /** Customers */
     Route::prefix('customers')->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('admin.customers.index');
+    });
+
+    /** Packages */
+    Route::prefix('packages')->group(function () {
+        Route::get('/', [PackageController::class, 'index'])->name('admin.packages.index');
+        Route::get('create', [PackageController::class, 'create'])->name('admin.packages.create');
+        Route::post('store', [PackageController::class, 'store'])->name('admin.packages.store');
+        Route::get('{package}/show', [PackageController::class, 'show'])->name('admin.packages.show');
+        Route::get('{package}/edit', [PackageController::class, 'edit'])->name('admin.packages.edit');
+        Route::patch('{package}/update', [PackageController::class, 'update'])->name('admin.packages.update');
+        Route::delete('{package}/delete', [PackageController::class, 'destroy'])->name('admin.packages.delete');
+
+        /** Image */
+        Route::get('{package}/add-image', [PackageController::class, 'addImage'])->name('admin.packages.add-image');
+        Route::post('{package}/upload-image', [PackageController::class, 'uploadImage'])->name('admin.packages.upload-image');
+        Route::delete('{package}/{image}/delete-image', [PackageController::class, 'deleteImage'])->name('admin.packages.delete-image');
     });
 });
