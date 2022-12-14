@@ -15,9 +15,14 @@
 
         <h5 class="sidebar-title">General</h5>
 
-        <a href="#" class="sidebar-item @yield('dashboardPage')">
+        <a href="{{ route('admin.dashboard') }}" class="sidebar-item @yield('dashboardPage')">
             <img src="{{ asset('backend/images/icons/home.svg') }}" alt="icon" width="18" height="18" class="me-3">
             <span>Dashboard</span>
+        </a>
+
+        <a href="{{ route('admin.customers.index') }}" class="sidebar-item @yield('customerPage')">
+            <img src="{{ asset('backend/images/icons/home.svg') }}" alt="icon" width="18" height="18" class="me-3">
+            <span>Customer</span>
         </a>
 
         <h5 class="sidebar-title">Settings</h5>
