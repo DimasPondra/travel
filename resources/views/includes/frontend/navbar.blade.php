@@ -45,21 +45,51 @@
                 </li>
             </ul>
 
-            <!-- Mobile Button -->
-            <form class="form inline d-sm-block d-md-none">
-                <button class="btn btn-login my-2 my-sm-0">
-                    Masuk
-                </button>
-            </form>
-
-            <!-- Desktop Button -->
-            <form class="form inline my-2 my-lg-0 d-none d-md-block">
-                <button
-                    class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4"
+            @auth
+                <!-- Mobile Button -->
+                <form
+                    action="{{ route('logout') }}"
+                    method="POST"
+                    class="form inline d-sm-block d-md-none"
                 >
-                    Masuk
-                </button>
-            </form>
+                    @csrf
+                    <button type="submit" class="btn btn-login my-2 my-sm-0">
+                        Logout
+                    </button>
+                </form>
+
+                <!-- Desktop Button -->
+                <form
+                    action="{{ route('logout') }}"
+                    method="POST"
+                    class="form inline my-2 my-lg-0 d-none d-md-block"
+                >
+                    @csrf
+                    <button
+                        type="submit"
+                        class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4"
+                    >
+                        Logout
+                    </button>
+                </form>
+            @else
+                <!-- Mobile Button -->
+                <div class="form inline d-sm-block d-md-none">
+                    <a href="{{ route('auth.login-page') }}" class="btn btn-login my-2 my-sm-0">
+                        Masuk
+                    </a>
+                </div>
+
+                <!-- Desktop Button -->
+                <div class="form inline my-2 my-lg-0 d-none d-md-block">
+                    <a
+                        href="{{ route('auth.login-page') }}"
+                        class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4"
+                    >
+                        Masuk
+                    </a>
+                </div>
+            @endauth
         </div>
     </nav>
 </div>
