@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\PackagePageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomePageController::class, 'index'])->name('home-page');
+Route::get('packages', [PackagePageController::class, 'index'])->name('package-page');
+Route::get('packages/{package:slug}', [PackagePageController::class, 'show'])->name('detail-package-page');
 
 /** Auth */
 Route::prefix('auth')->middleware('guest')->group(function () {

@@ -20,7 +20,7 @@
                     >
                 </li>
                 <li class="nav-item mx-md-2">
-                    <a href="travel-packages.html" class="nav-link"
+                    <a href="{{ route('package-page') }}" class="nav-link @yield('packagePage')"
                         >Paket Travel</a
                     >
                 </li>
