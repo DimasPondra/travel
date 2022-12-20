@@ -27,6 +27,9 @@ Route::get('packages/{package:slug}', [PackagePageController::class, 'show'])->n
 Route::prefix('auth')->middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'loginPage'])->name('auth.login-page');
     Route::post('login', [AuthController::class, 'authenticate'])->name('auth.login-process');
+
+    Route::get('register', [AuthController::class, 'registerPage'])->name('auth.register-page');
+    Route::post('register', [AuthController::class, 'registerProcess'])->name('auth.register-process');
 });
 
 Route::middleware('auth')->group(function () {

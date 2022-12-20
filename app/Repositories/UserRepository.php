@@ -32,4 +32,11 @@ class UserRepository
 
         return $users->get();
     }
+
+    public function save(User $user)
+    {
+        $user->save();
+
+        return $user;
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login - Travel')
+@section('title', 'Register - Travel')
 
 @section('content')
     <main class="login-container">
@@ -29,13 +29,29 @@
                                     />
                                 </a>
                             </div>
-                            <form action="{{ route('auth.login-process') }}" method="POST">
+                            <form action="{{ route('auth.register-process') }}" method="POST">
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="email"
-                                        >Email Address</label
-                                    >
+                                    <label for="name">Full Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="name"
+                                        name="name"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="username"
+                                        name="username"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
                                     <input
                                         type="email"
                                         class="form-control"
@@ -44,9 +60,7 @@
                                     />
                                 </div>
                                 <div class="form-group">
-                                    <label for="password"
-                                        >Password</label
-                                    >
+                                    <label for="password">Password</label>
                                     <input
                                         type="password"
                                         class="form-control"
@@ -54,27 +68,31 @@
                                         name="password"
                                     />
                                 </div>
-                                {{-- <div class="form-group form-check">
-                                    <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                        id="exampleCheck1"
-                                    />
-                                    <label
-                                        for="exampleCheck1"
-                                        class="form-check-label"
-                                        >Remember Me</label
+                                <div class="form-group">
+                                    <label for="confirmPassword"
+                                        >Confirm Password</label
                                     >
-                                </div> --}}
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="confirmPassword"
+                                        name="password_confirmation"
+                                    />
+                                </div>
                                 <button
                                     type="submit"
                                     class="btn btn-login btn-block"
                                 >
-                                    Sign In
+                                    Register Now
                                 </button>
                                 <p class="text-center mt-4">
-                                    <a href="{{ route('auth.register-page') }}">Belum punya akun</a>
-                                    {{-- <a href="register.html">Saya lupa password</a> --}}
+                                    Sudah punya akun ?
+                                    <a
+                                        href="{{ route('auth.login-page') }}"
+                                        style="color: #071c4d"
+                                    >
+                                        Sign In
+                                    </a>
                                 </p>
                             </form>
                         </div>
