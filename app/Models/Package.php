@@ -38,4 +38,15 @@ class Package extends Model
     {
         return round($this->price);
     }
+
+    public function getFirstImageAttribute()
+    {
+        $image = $this->images()->first();
+
+        if (!empty($image)) {
+            return $image->file->show_file;
+        } else {
+            return url('frontend/images/Travel-1.jpg');
+        }
+    }
 }

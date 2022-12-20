@@ -59,6 +59,8 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Departure Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -66,6 +68,8 @@
                                     @forelse ($packages as $package)
                                         <tr>
                                             <td>{{ $package->name }}</td>
+                                            <td>{{ $package->location }}</td>
+                                            <td>{{ $package->format_date }}</td>
                                             <td width="10%">
                                                 <div class="dropdown">
                                                     <button

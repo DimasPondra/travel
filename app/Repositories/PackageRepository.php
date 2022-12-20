@@ -21,6 +21,9 @@ class PackageRepository
             })
             ->when(!empty($params['order']), function ($query) use ($params) {
                 return $query->orderByRaw($params['order']);
+            })
+            ->when(!empty($params['limit']), function ($query) use ($params) {
+                return $query->limit($params['limit']);
             });
 
         if (!empty($params['paginate'])) {
