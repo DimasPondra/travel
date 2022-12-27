@@ -43,6 +43,13 @@
                         >Testimonial</a
                     >
                 </li>
+                @auth
+                    <li class="nav-item mx-md-2">
+                        <a href="{{ route('dashboard.profile') }}" class="nav-link">
+                            {{ Auth::user()->username }}
+                        </a>
+                    </li>
+                @endauth
             </ul>
 
             @auth

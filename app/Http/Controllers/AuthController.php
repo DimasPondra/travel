@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -71,6 +72,8 @@ class AuthController extends Controller
 
             $user = new User();
             $user = $this->userRepository->save($user->fill($data));
+
+            Profile::create(['user_id' => $user->id]);
 
             Auth::login($user, $remember = true);
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PackagePageController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,12 @@ Route::prefix('auth')->middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+/** User Panel */
+Route::prefix('dashboard')->middleware('user')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('dashboard.profile');
+    Route::patch('profile-update', [ProfileController::class, 'update'])->name('dashboard.profile-update');
 });
 
 /** Admin Panel */
