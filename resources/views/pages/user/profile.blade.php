@@ -123,40 +123,37 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card card-details card-right">
-                            <h2>Members are going</h2>
-                            <div class="members my-2">
-                                <img
-                                    src="{{ asset('frontend/images/Testimonial-2.png') }}"
-                                    class="member-image mr-1"
-                                />
-                                <img
-                                    src="{{ asset('frontend/images/Testimonial-3.png') }}"
-                                    class="member-image mr-1"
-                                />
-                                <img
-                                    src="{{ asset('frontend/images/Testimonial-4.png') }}"
-                                    class="member-image mr-1"
-                                />
-                                <img
-                                    src="{{ asset('frontend/images/Testimonial-5.png') }}"
-                                    class="member-image mr-1"
-                                />
-                                <img
-                                    src="{{ asset('frontend/images/Testimonial-6.png') }}"
-                                    class="member-image mr-1"
-                                />
-                            </div>
-                            <hr />
-                            <h2>Trip Informations</h2>
-                        </div>
-                        <div class="join-container">
-                            <a
-                                href="checkout.html"
-                                class="btn btn-block btn-join-now mt-3 py-2"
+                        <div class="card card-details">
+                            <img
+                                src="{{ !empty($user->profile->file_id) ? $user->profile->file->show_file : asset('frontend/images/Image-1.jpg') }}"
+                                class="img-thumbnail mx-auto"
+                                alt="avatar"
+                                style="width: 200px; height: 200px; object-fit: cover;"
                             >
-                                Join Now
-                            </a>
+                            <hr />
+                            <form action="{{ route('dashboard.photo-profile-update') }}" method="POST" enctype="multipart/form-data">
+                                @method('PATCH')
+                                @csrf
+
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input
+                                            type="file"
+                                            class="custom-file-input @error('file')
+                                                is-invalid
+                                            @enderror"
+                                            id="file"
+                                            name="file"
+                                        >
+                                        <label class="custom-file-label" for="file">Choose file</label>
+                                    </div>
+                                </div>
+                                @error('file')
+                                    <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                @enderror
+
+                                <button type="submit" class="btn btn-sm btn-block btn-warning">Upload Avatar</button>
+                            </form>
                         </div>
                     </div>
                 </div>

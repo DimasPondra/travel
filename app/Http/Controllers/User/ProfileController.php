@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PhotoProfileUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Profile;
 use App\Repositories\UserRepository;
@@ -37,6 +39,30 @@ class ProfileController extends Controller
             $profile = Profile::where('user_id', $user->id)->first();
             $profile['nationality'] = $request->nationality;
             $profile->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return back()->withErrors([
+                'errors' => $th->getMessage()
+            ]);
+        }
+
+        return redirect()->route('dashboard.profile')->with([
+            'success' => 'Profile successfully updated.'
+        ]);
+    }
+
+    public function photoUpdate(PhotoProfileUpdateRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $file = FileHelper::store($request->file('file'), 'avatars');
+
+            $profile = Profile::where('user_id', auth()->id())->first();
+            $profile->update(['file_id' => $file->id]);
 
             DB::commit();
         } catch (\Throwable $th) {
