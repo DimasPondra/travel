@@ -47,6 +47,7 @@ Route::prefix('dashboard')->middleware('user')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('dashboard.profile');
     Route::patch('profile-update', [ProfileController::class, 'update'])->name('dashboard.profile-update');
     Route::patch('photo-profile-update', [ProfileController::class, 'photoUpdate'])->name('dashboard.photo-profile-update');
+    Route::patch('change-password', [ProfileController::class, 'changePassword'])->name('dashboard.change-password');
 });
 
 /** Admin Panel */

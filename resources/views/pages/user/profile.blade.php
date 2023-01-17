@@ -21,105 +21,202 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 pl-lg-0">
-                        <div class="card card-details">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div class="card card-details">
 
-                            @include('pages.partial.message-bs-4')
+                                    @include('pages.partial.message-bs-4')
 
-                            <form action="{{ route('dashboard.profile-update') }}" method="POST">
-                                @method('PATCH')
-                                @csrf
+                                    <form action="{{ route('dashboard.profile-update') }}" method="POST">
+                                        @method('PATCH')
+                                        @csrf
 
-                                <div class="row">
-                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="name" class="mb-2">
+                                                        Name
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        class="form-control @error('name')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="name"
+                                                        name="name"
+                                                        value="{{ old('name', $user->name) }}"
+                                                    >
+                                                    @error('name')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="username" class="mb-2">
+                                                        Username
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        class="form-control @error('username')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="username"
+                                                        name="username"
+                                                        value="{{ old('username', $user->username) }}"
+                                                    >
+                                                    @error('username')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="email" class="mb-2">
+                                                        Email
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="email"
+                                                        class="form-control @error('email')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="email"
+                                                        name="email"
+                                                        value="{{ old('email', $user->email) }}"
+                                                    >
+                                                    @error('email')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="nationality" class="mb-2">
+                                                        Nationality
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        class="form-control @error('nationality')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="nationality"
+                                                        name="nationality"
+                                                        value="{{ old('nationality', $user->profile->nationality) }}"
+                                                    >
+                                                    @error('nationality')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="submit" class="btn btn-sm btn-success">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card card-details">
+
+                                    @if (session('auth'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('auth') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
+
+                                    @error('auth')
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ $message }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @enderror
+
+                                    <form action="{{ route('dashboard.change-password') }}" method="POST">
+                                        @method('PATCH')
+                                        @csrf
+
                                         <div class="form-group mb-3">
-                                            <label for="name" class="mb-2">
-                                                Name
+                                            <label for="password" class="mb-2">
+                                                Password
                                                 <span class="required">*</span>
                                             </label>
                                             <input
-                                                type="text"
-                                                class="form-control @error('name')
+                                                type="password"
+                                                class="form-control @error('password')
                                                     is-invalid
                                                 @enderror"
-                                                id="name"
-                                                name="name"
-                                                value="{{ old('name', $user->name) }}"
+                                                id="password"
+                                                name="password"
                                             >
-                                            @error('name')
+                                            @error('password')
                                                 <p class="text-danger text-sm mt-1">{{ $message }}</p>
                                             @enderror
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="form-group mb-3">
-                                            <label for="username" class="mb-2">
-                                                Username
-                                                <span class="required">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control @error('username')
-                                                    is-invalid
-                                                @enderror"
-                                                id="username"
-                                                name="username"
-                                                value="{{ old('username', $user->username) }}"
-                                            >
-                                            @error('username')
-                                                <p class="text-danger text-sm mt-1">{{ $message }}</p>
-                                            @enderror
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="new_password" class="mb-2">
+                                                        New Password
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="password"
+                                                        class="form-control @error('new_password')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="new_password"
+                                                        name="new_password"
+                                                    >
+                                                    @error('new_password')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="new_password_confirmation" class="mb-2">
+                                                        Confirm New Password
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="password"
+                                                        class="form-control @error('new_password')
+                                                            is-invalid
+                                                        @enderror"
+                                                        id="new_password_confirmation"
+                                                        name="new_password_confirmation"
+                                                    >
+                                                    @error('new_password')
+                                                        <p class="text-danger text-sm mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="submit" class="btn btn-sm btn-success">Save</button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group mb-3">
-                                            <label for="email" class="mb-2">
-                                                Email
-                                                <span class="required">*</span>
-                                            </label>
-                                            <input
-                                                type="email"
-                                                class="form-control @error('email')
-                                                    is-invalid
-                                                @enderror"
-                                                id="email"
-                                                name="email"
-                                                value="{{ old('email', $user->email) }}"
-                                            >
-                                            @error('email')
-                                                <p class="text-danger text-sm mt-1">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group mb-3">
-                                            <label for="nationality" class="mb-2">
-                                                Nationality
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control @error('nationality')
-                                                    is-invalid
-                                                @enderror"
-                                                id="nationality"
-                                                name="nationality"
-                                                value="{{ old('nationality', $user->profile->nationality) }}"
-                                            >
-                                            @error('nationality')
-                                                <p class="text-danger text-sm mt-1">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-end mt-3">
-                                    <button type="submit" class="btn btn-sm btn-success">Save</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-4">

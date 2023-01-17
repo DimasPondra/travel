@@ -4,12 +4,14 @@ namespace App\Http\Controllers\User;
 
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\PhotoProfileUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Profile;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -75,6 +77,37 @@ class ProfileController extends Controller
 
         return redirect()->route('dashboard.profile')->with([
             'success' => 'Profile successfully updated.'
+        ]);
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = auth()->user();
+
+            if (!Hash::check($request->password, $user->password)) {
+                return back()->withErrors([
+                    'auth' => 'Password did not match.'
+                ]);
+            }
+
+            $this->userRepository->save($user->fill([
+                'password' => bcrypt($request->new_password)
+            ]));
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->back()->withErrors([
+                'errors' => $th->getMessage()
+            ]);
+        }
+
+        return redirect()->route('dashboard.profile')->with([
+            'auth' => 'Password successfully updated.'
         ]);
     }
 }
