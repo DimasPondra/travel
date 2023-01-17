@@ -83,7 +83,7 @@
                                 <div class="travel-location">{{ $package->name }}</div>
                                 <div class="travel-button mt-auto">
                                     <a
-                                        href="details.html"
+                                        href="{{ route('detail-package-page', $package) }}"
                                         class="btn btn-travel-details px-4"
                                     >
                                         View Details
